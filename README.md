@@ -3,9 +3,8 @@ Open Testbed Platform for Drones
 
 ===================================
 
-Steps needed to work with USRP E310:
+Steps needed for using serial port to connect to E310:
 
-if you like to use serial port to connect to E310:
 1) sudo adduser $USER dialout (screen /dev/ttyUSB0 115200)
 
 2) logout
