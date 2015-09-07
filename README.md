@@ -12,7 +12,10 @@ if you like to use serial port to connect to E310:
 
 3) screen /dev/ttyUSB0 115200
 
-to use USRP folder on your host:
+-----------------------------------
+
+To use USRP folder on your host:
+
 1) sudo adduser $USER fuse
 
 2) logout
@@ -54,7 +57,7 @@ Steps needed to port QtSerialPort to USRP E310:
 
 5) cd build
 
-6) <path-to-sdk>/sysroots/armv7ahf-vfp-neon-oe-linux-gnueabi/usr/local/Qt-5.6.0/bin/qmake ..
+6) /path-to-sdk/sysroots/armv7ahf-vfp-neon-oe-linux-gnueabi/usr/local/Qt-5.6.0/bin/qmake ..
 
 7) make
 
