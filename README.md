@@ -67,10 +67,13 @@ Steps needed to port QtSerialPort to USRP E310:
 Steps for Volk benchmark testing on USRP E310:
 
 1) pip install numpy
+
 2) pip install matplotlib
 
 3) cd /path-to-gnuradio/examples/volk_benchmark
+
 4) vim volk_test_funcs.py 
+
 5) replace all scipy with numpy
 
 6) read the README file for doing different tests.
