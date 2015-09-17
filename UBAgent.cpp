@@ -1,31 +1,31 @@
-#include "agent.h"
+#include "UBAgent.h"
 
 #include "ArduPilotMegaMAV.h"
 #include "SerialLinkInterface.h"
 
-QAgent::QAgent(int &argc, char* argv[]) : QGCCore(argc, argv),
+UBAgent::UBAgent(int &argc, char* argv[]) : QGCCore(argc, argv),
     m_uav(NULL),
     m_stage(STAGE_START),
     m_led_on(false),
     m_loiter_timer(0)
 {
 
-    m_phy = new PHYLink(this);
+    m_net = new UBNetwork(this);
 
     m_msg.append(MAV_CMD_NAV_TAKEOFF);
 }
 
-QAgent::~QAgent() {
+UBAgent::~UBAgent() {
 }
 
-void QAgent::initialize() {
+void UBAgent::initialize() {
 
     QGCCore::initialize();
 
     connect(LinkManager::instance(), SIGNAL(newLink(int)), this, SLOT(handleNewLink(int)));
 }
 
-void QAgent::handleNewLink(int linkid) {
+void UBAgent::handleNewLink(int linkid) {
     if(LinkManager::instance()->getLinkType(linkid) == LinkInterface::SERIAL_LINK) {
         SerialLinkInterface* link = static_cast<SerialLinkInterface*>(LinkManager::instance()->getLink(linkid));
 
@@ -38,7 +38,7 @@ void QAgent::handleNewLink(int linkid) {
     }
 }
 
-void QAgent::handleActiveUAV(UASInterface* uav)
+void UBAgent::handleActiveUAV(UASInterface* uav)
 {
     UASManager::instance()->getActiveUASWaypointManager();
 
@@ -57,13 +57,13 @@ void QAgent::handleActiveUAV(UASInterface* uav)
     m_trackTimer->start();
 }
 
-void QAgent::handleHeartbeatTimeout(bool, uint) {
+void UBAgent::handleHeartbeatTimeout(bool, uint) {
     QLOG_FATAL() << "The master has lost the connetction to APM!!!";
 
     QCoreApplication::exit(-1);
 }
 
-void QAgent::missionTracker() {
+void UBAgent::missionTracker() {
 //    if (m_led_on) {
 //        m_led_on = false;
 //    } else {
@@ -92,7 +92,7 @@ void QAgent::missionTracker() {
     }
 }
 
-void QAgent::stageStart() {
+void UBAgent::stageStart() {
     if (m_uav->getAltitudeRelative() < ALT_MIN) {
 
         if (m_uav->getSatelliteCount() < GPS_ACCURACY)
@@ -119,10 +119,10 @@ void QAgent::stageStart() {
     }
 }
 
-void QAgent::stageLoiter() {
+void UBAgent::stageLoiter() {
     if ((QGC::groundTimeSeconds() - m_loiter_timer > LOITER_TIME)) {
         m_uav->executeCommand(MAV_CMD_NAV_LAND, 1, 0, 0, 0, 0, 0, 0, 0, 0);
-        m_phy->sendData(&m_msg);
+        m_net->sendData(&m_msg);
         m_stage = STAGE_STOP;
         return;
     }
@@ -132,8 +132,8 @@ void QAgent::stageLoiter() {
     }
 }
 
-void QAgent::stageStop() {
-    m_phy->sendData(&m_msg);
+void UBAgent::stageStop() {
+    m_net->sendData(&m_msg);
 
     if (m_uav->getAltitudeRelative() > ALT_MAX - ALT_MIN) {
         m_uav->executeCommand(MAV_CMD_NAV_LAND, 1, 0, 0, 0, 0, 0, 0, 0, 0);

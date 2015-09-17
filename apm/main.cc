@@ -28,7 +28,7 @@ This file is part of the QGROUNDCONTROL project
  *
  */
 
-#include "agent.h"
+#include "UBAgent.h"
 //#include "MainWindow.h"
 #include "configuration.h"
 #include "QsLog.h"

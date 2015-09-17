@@ -1,19 +1,19 @@
-#ifndef QAgent_H
-#define QAgent_H
+#ifndef UBAgent_H
+#define UBAgent_H
 
 #include <QObject>
 
 #include "QGCCore.h"
-#include "phylink.h"
+#include "UBNetwok.h"
 
 #include "ArduPilotMegaMAV.h"
 
-class QAgent : public QGCCore
+class UBAgent : public QGCCore
 {
     Q_OBJECT
 public:
-    QAgent(int &argc, char* argv[]);
-    ~QAgent();
+    UBAgent(int &argc, char* argv[]);
+    ~UBAgent();
 
     void initialize();
 
@@ -56,9 +56,9 @@ private slots:
 
 private:
     QTimer* m_trackTimer;
-    PHYLink* m_phy;
+    UBNetwork* m_net;
 
     QByteArray m_msg;
 };
 
-#endif // QAgent_H
+#endif // UBAgent_H

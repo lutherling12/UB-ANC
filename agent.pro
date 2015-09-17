@@ -17,11 +17,11 @@ include(QsLog/QsLog.pri)
 include(alglib/alglib.pri)
 
 INCLUDEPATH += apm/ \
-    apm/mavlink \
-    apm/comm \
-    apm/uas \
-    apm/ui \
-    net/phy/ \
+    apm/mavlink/ \
+    apm/comm/ \
+    apm/uas/ \
+    apm/ui/ \
+    net/ \
 
 SOURCES +=\
     apm/comm/AbsPositionOverview.cc \
@@ -55,8 +55,8 @@ SOURCES +=\
     apm/Waypoint.cc \
     apm/QGCCore.cc \
     apm/main.cc \
-    net/phy/phylink.cpp \
-    agent.cpp \
+    UBAgent.cpp \
+    net/UBNetwork.cpp
 
 HEADERS += \
     apm/comm/AbsPositionOverview.h \
@@ -96,6 +96,6 @@ HEADERS += \
     apm/QGCGeo.h \
     apm/Waypoint.h \
     apm/QGCCore.h \
-    net/phy/phylink.h \
-    agent.h \
+    UBAgent.h \
+    net/UBNetwork.h
 
