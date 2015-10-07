@@ -1,5 +1,5 @@
-#ifndef UBAgent_H
-#define UBAgent_H
+#ifndef UBAGENT_H
+#define UBAGENT_H
 
 #include <QObject>
 
@@ -61,4 +61,4 @@ private:
     QByteArray m_msg;
 };
 
-#endif // UBAgent_H
+#endif // UBAGENT_H
