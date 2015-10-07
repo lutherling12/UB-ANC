@@ -1,5 +1,5 @@
-#ifndef UBNetwork_H
-#define UBNetwork_H
+#ifndef UBNETWORK_H
+#define UBNETWORK_H
 
 #include <QHostAddress>
 #include <QTcpSocket>
@@ -55,4 +55,4 @@ private:
     QByteArray m_data;
 };
 
-#endif // UBNetwork_H
+#endif // UBNETWORK_H
