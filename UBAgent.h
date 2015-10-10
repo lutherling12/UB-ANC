@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "QGCCore.h"
-#include "UBNetwok.h"
+#include "UBNetwork.h"
 
 #include "ArduPilotMegaMAV.h"
 
