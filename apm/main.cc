@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
     //qInstallMsgHandler( msgHandler );
 #endif
 
-    QAgent core(argc, argv);
+    UBAgent core(argc, argv);
     // init the logging mechanism
     QsLogging::Logger& logger = QsLogging::Logger::instance();
     logger.setLoggingLevel(QsLogging::DebugLevel);
