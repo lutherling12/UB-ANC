@@ -71,7 +71,7 @@ void UBNetwork::dataAvailable() {
 }
 
 void UBNetwork::phyConnected() {
-    QLOG_DEBUG() << "We connect to the PHY";
+    QLOG_INFO() << "We connect to the PHY";
 }
 
 void UBNetwork::phyDisconnected() {
@@ -80,7 +80,7 @@ void UBNetwork::phyDisconnected() {
 }
 
 void UBNetwork::phyError(QAbstractSocket::SocketError) {
-   QLOG_DEBUG() << "PHY ERROR: " << m_socket->errorString();
+   QLOG_ERROR() << "PHY ERROR: " << m_socket->errorString();
 }
 
 void UBNetwork::phyTracker() {
