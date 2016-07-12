@@ -1,87 +1,79 @@
+Copyright © 2014, 2015, 2016 Jalil Modares
+
+This program is part of my Ph.D. Dissertation research in the Department of Electrical Engineering at the University at Buffalo. I work in UB's Multimedia Communications and Systems Laboratory with my Ph.D. adviser, Prof. Nicholas Mastronarde <http://www.eng.buffalo.edu/~nmastron/>.
+
+Please cite this GitHub repository if you find this program useful in your work/research.
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 # UB-ANC
 Open Testbed Platform for Drones
 
-===================================
+Raspberry Pi
+------------
+
+Run these commands to install Qt and build the agent:
+
+```
+sudo apt-get install qt5-default
+sudo apt-get install libqt5serialport5-dev
+git clone https://github.com/jmodares/UB-ANC-Agent
+mkdir build-agent
+cd build-agent
+qmake ../UB-ANC-Agent
+make -j4
+```
+
+USRP E310
+----------
 
 Steps needed for using serial port to connect to USRP E310:
-
-1) sudo adduser $USER dialout (screen /dev/ttyUSB0 115200)
-
-2) logout
-
-3) screen /dev/ttyUSB0 115200
-
------------------------------------
+  - Run `sudo adduser $USER dialout (screen /dev/ttyUSB0 115200)`
+  - Logout
+  - Run `screen /dev/ttyUSB0 115200`
 
 To use USRP E310 folder on your host:
-
-1) sudo adduser $USER fuse
-
-2) logout
-
-3) sshfs -o allow_root root@128.205.187.244:/ usrp-folder-host
-
------------------------------------
+  - Run `sudo adduser $USER fuse`
+  - Logout
+  - Run `sshfs -o allow_root root@128.205.187.244:/ usrp-folder-host`
 
 Steps needed to port Qt5 to USRP E310:
 
-1) git clone  https://github.com/qtproject/qtbase
-
-2) cd qtbase
-
-3) git checkout stable
-
-4) mkdir build
-
-5) cd build
-
-6) ../configure {with custom parameters in the folder}
-
-7) make -j4
-
-8) make install
-
------------------------------------
+```
+git clone  https://github.com/qtproject/qtbase
+cd qtbase
+git checkout stable
+mkdir build
+cd build
+../configure {with custom parameters in the folder}
+make -j4
+make install
+```
 
 Steps needed to port QtSerialPort to USRP E310:
 
-
-1) git clone  https://github.com/qtproject/qtserialport
-
-2) cd qtserial
-
-3) git checkout stable
-
-4) mkdir build
-
-5) cd build
-
-6) /path-to-sdk/sysroots/armv7ahf-vfp-neon-oe-linux-gnueabi/usr/local/Qt-5.6.0/bin/qmake ..
-
-7) make
-
-8) make install
-
------------------------------------
+```
+git clone  https://github.com/qtproject/qtserialport
+cd qtserial
+git checkout stable
+mkdir build
+cd build
+/path-to-sdk/sysroots/armv7ahf-vfp-neon-oe-linux-gnueabi/usr/local/Qt-5.6.0/bin/qmake ..
+make -j4
+make install
+```
 
 Steps for Volk benchmark testing on USRP E310:
 
-1) pip install numpy
-
-2) pip install matplotlib
-
-3) cd /path-to-gnuradio/examples/volk_benchmark
-
-4) vim volk_test_funcs.py 
-
-5) replace all scipy with numpy
-
-6) read the README file for doing different tests.
-
-For the current CPU speed one can dynamically watch this change in real time using:
-
-sudo watch -n 1  cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq
-
-To see the maximum CPU speed, use:
-
-cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq 
+```
+pip install numpy
+pip install matplotlib
+cd /path-to-gnuradio/examples/volk_benchmark
+vim volk_test_funcs.py 
+replace all scipy with numpy
+read the README file for doing different tests.
+```
